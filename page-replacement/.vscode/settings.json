@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.asm": "assembly",
+        "replacement_alg.h": "c"
+    }
+}

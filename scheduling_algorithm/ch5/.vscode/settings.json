@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.asm": "assembly",
+        "schedulers.h": "c",
+        "*.tcc": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "task.h": "c",
+        "string.h": "c",
+        "list.h": "c",
+        "cpu.h": "c"
+    }
+}

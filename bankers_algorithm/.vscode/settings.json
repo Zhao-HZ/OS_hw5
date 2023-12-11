@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.asm": "assembly",
+        "banker.h": "c",
+        "string.h": "c"
+    }
+}
