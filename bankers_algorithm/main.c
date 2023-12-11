@@ -16,6 +16,7 @@ extern int allocation[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 FILE* in;
 
 void debug_array(int *array, int n);
+void update_need();
 
 int main(int argc, char **argv) {
     for (int i = 1; i < NUMBER_OF_RESOURCES + 1; i++) {
@@ -31,11 +32,14 @@ int main(int argc, char **argv) {
     }
     fclose(in);
     
-    for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
-        for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
-            need[i][j] = maximum[i][j] - allocation[i][j];
-        }
-    }
+    // for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
+    //     for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
+    //         need[i][j] = maximum[i][j] - allocation[i][j];
+    //     }
+    // }
+
+    update_need();
+
     while (1) {
         char buf[MAX_CHAR_COM];
         char c;
@@ -59,6 +63,14 @@ int main(int argc, char **argv) {
 
             int result = request_resources(customer_index, require);
 
+            if (result == 1) {
+                printf("Safe\n");
+            } else {
+                printf("Unsafe\n");
+            }
+
+            update_need();
+
         // Release resources
         } else if (buf[0] == 'R' && buf[1] == 'L') {
             char *pointer = (buf + 3);
@@ -72,13 +84,23 @@ int main(int argc, char **argv) {
 
             // printf("Release\n");
             // debug_array(release, 4);
-
+            update_need();
         // Output the value
         } else {
             output();
         }
     }
     return 0;
+}
+
+// It is necessary to update need again after 
+// requesting and releasing.
+void update_need() {
+    for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
+        for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
+            need[i][j] = maximum[i][j] - allocation[i][j];
+        }
+    }
 }
 
 void debug_array(int *array, int n) {
