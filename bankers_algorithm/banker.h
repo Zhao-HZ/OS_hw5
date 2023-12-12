@@ -5,8 +5,9 @@
 #define NUMBER_OF_RESOURCES 4
 
 
-// 0 if successful.
-// -1 if unsuccessful.
+// 0 if unsafe.
+// 1 if safe
+// -1 if error
 // Determine if the request should be granted.
 int request_resources(int customer_num, int request[]);
 
@@ -25,6 +26,7 @@ int find_i(int *work, int *finish);
 // Outputs the available, maximum, allocation and need.
 void output();
 
+// Use for debug
 void debug();
 
 #endif

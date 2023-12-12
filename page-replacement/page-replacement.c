@@ -23,15 +23,15 @@ int main(int argc, char **argv) {
     int num_page_frames;
     scanf("%d", &num_page_frames);    
     initialize(num_page_frames, 12);    
-    // printf("FIFO\n");
-    // run_fifo(page_address_stream);
-    // clear_array();
-    // printf("OPT\n");
-    // run_opt(page_address_stream);
-    // clear_array();
-    printf("LRU\n");
-    run_lru(page_address_stream);
+    printf("FIFO\n");
+    run_fifo(page_address_stream);
     clear_array();
+    printf("OPT\n");
+    run_opt(page_address_stream);
+    clear_array();
+    // printf("LRU\n");
+    // run_lru(page_address_stream);
+    // clear_array();
     delete_array();
     return 0;
 }

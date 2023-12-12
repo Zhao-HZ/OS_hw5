@@ -26,7 +26,7 @@ int request_resources(int customer_num, int request[]) {
         fake_need[i] = need[customer_num][i];
     }
 
-
+    int flag;
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
         if (request[i] > need[customer_num][i]) {
             flag = 0;
@@ -35,10 +35,11 @@ int request_resources(int customer_num, int request[]) {
         }
     }
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
-        printf("Please wait!\n");
-        printf("Thank you for your patience!\n");
-        if (request[i] > available[i])
+        if (request[i] > available[i]) {
+            printf("Please wait!\n");
+            printf("Thank you for your patience!\n");
             return -1;
+        }
     } 
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
         fake_available[i] -= request[i];
@@ -50,12 +51,17 @@ int request_resources(int customer_num, int request[]) {
 }
 
 void release_resources(int customer_num, int release[]) {
-
+    for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
+        allocation[customer_num][i] -= release[i];
+    }
 }
 
 int is_safe(int customer_num) {
     int work[NUMBER_OF_RESOURCES];
     int finish[NUMBER_OF_CUSTOMERS];
+    for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
+        finish[i] = 0;
+    }
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
         work[i] = fake_available[i];
     }
@@ -65,7 +71,7 @@ int is_safe(int customer_num) {
         if (i == -1) break;
         else {
             for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
-                work[j] += fake_allocation[i][j];
+                work[j] += fake_allocation[j];
             }
             finish[i] = 1;
         }
@@ -88,7 +94,7 @@ int find_i(int *work, int* finish) {
             for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
                 // At least one does not
                 // fulfill the condition Need_i <= Work
-                if (fake_need[i][j] > work[j]) {  
+                if (fake_need[j] > work[j]) {  
                     find = 0;
                     break;
                 } 
@@ -115,26 +121,26 @@ void debug() {
 
 
 void output() {
-    printf("available\n");
+    printf("Available\n");
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++)
         printf("%d ", available[i]);
     printf("\n");
 
-    printf("maximum\n");
+    printf("Maximum\n");
     for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
         for (int j = 0; j < NUMBER_OF_RESOURCES; j++)
             printf("%d ", maximum[i][j]);
         printf("\n");
     }
 
-    printf("allocation\n");
+    printf("Allocation\n");
     for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
         for (int j = 0; j < NUMBER_OF_RESOURCES; j++)
             printf("%d ", allocation[i][j]);
         printf("\n");
     }
 
-    printf("need\n");
+    printf("Need\n");
     for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
         for (int j = 0; j < NUMBER_OF_RESOURCES; j++)
             printf("%d ", need[i][j]);
