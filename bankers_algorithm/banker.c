@@ -52,7 +52,13 @@ int request_resources(int customer_num, int request[]) {
 
 void release_resources(int customer_num, int release[]) {
     for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
+        if (allocation[customer_num][i] < release[i]) {
+            printf("Error!\n");
+            printf("Please check that you have enough resources\n");
+            printf("to release!\n");
+        }
         allocation[customer_num][i] -= release[i];
+        available[i] += release[i];
     }
 }
 

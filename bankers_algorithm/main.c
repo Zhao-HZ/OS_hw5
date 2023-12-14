@@ -94,8 +94,12 @@ int main(int argc, char **argv) {
             // debug_array(release, 4);
             update_need();
         // Output the value
-        } else {
+        } else if (buf[0] == '*') {
             output();
+        } else if (buf[0] == 'q' || buf[0] == 'Q') {
+            return 0;
+        } else {
+            printf("Please enter the appropriate command\n");
         }
     }
     return 0;

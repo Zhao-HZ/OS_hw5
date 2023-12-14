@@ -23,6 +23,19 @@ LRU<br>
 
 ## Banker's Algorithm
 
+```sh
+cd YOUR_DIR/os_hw5/bankers_algorithm
+make all
+make run
+```
+<img src="./bankers_algorithm/img/img1.png">
+
+(cont.)
+<img src="./bankers_algorithm/img/img2.png">
+
+(cont.)
+<img src="./bankers_algorithm/img/img3.png">
+
 
 ## Scheduling Algorithm
 
